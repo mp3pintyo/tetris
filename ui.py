@@ -141,7 +141,7 @@ class UI:
         
     def draw_title(self):
         """Animált cím rajzolása."""
-        title_y = 40
+        title_y = 20  # 40-ről 120-ra növelve, hogy ne lógjon rá a játéktérre
         self.animation_time = time.time()
         glow_size = abs(math.sin(self.animation_time)) * 10 + 5
         

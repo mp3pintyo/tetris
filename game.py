@@ -108,7 +108,7 @@ class TetrisGame:
         Returns:
             Piece: Az új elem
         """
-        piece = Piece(5, 0, random.randint(0, len(SHAPES) - 1))
+        piece = Piece(5, INITIAL_Y_OFFSET, random.randint(0, len(SHAPES) - 1))
         
         # Ellenőrizzük, hogy az új elem elhelyezhető-e - ha nem, játék vége
         if not self.valid_move(piece, self.grid):

@@ -1,4 +1,4 @@
-from config import SHAPE_COLORS, SHAPES
+from config import SHAPE_COLORS, SHAPES, INITIAL_Y_OFFSET
 
 class Piece:
     """
@@ -11,11 +11,11 @@ class Piece:
         
         Args:
             x (int): X pozíció a játéktérben (0-9)
-            y (int): Y pozíció a játéktérben (kezdeti érték általában 0)
+            y (int): Y pozíció a játéktérben
             shape_index (int): Alakzat indexe a SHAPES listában
         """
         self.x = x
-        self.y = y
+        self.y = INITIAL_Y_OFFSET  # A kezdő Y pozíciót a konfigurációból olvassuk
         self.shape_index = shape_index
         self.color = SHAPE_COLORS[shape_index]
         self.rotation = 0
