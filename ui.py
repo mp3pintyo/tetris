@@ -23,7 +23,8 @@ class UI:
     def create_ui_panels(self):
         """Létrehozza az UI panel háttereket."""
         self.panel_main = self.create_panel(PLAY_WIDTH + 40, PLAY_HEIGHT + 40, 10)
-        self.panel_next = self.create_panel(PREVIEW_SIZE * 2 + 40, PREVIEW_SIZE * 2 + 40, 5)
+        # Csökkentett méret a következő elem panelhez
+        self.panel_next = self.create_panel(200, 130, 5)  # 160x160 méret elegendő a következő elemnek
         self.panel_score = self.create_panel(200, 80, 5)
         self.panel_controls = self.create_panel(200, 220, 5)
         
@@ -261,21 +262,27 @@ class UI:
             next_piece: A következő Piece objektum
         """
         panel_x = TOP_LEFT_X + PLAY_WIDTH + 50
-        panel_y = TOP_LEFT_Y + 50  # Feljebb került 20px-el az átlapolás elkerülése érdekében
+        panel_y = TOP_LEFT_Y + 50
         
         # Panel háttér rajzolása
         self.screen.blit(self.panel_next, (panel_x - 20, panel_y - 20))
         
         # Fejléc rajzolása
-        self.draw_text("KÖVETKEZŐ", FONT_MEDIUM, WHITE, panel_x + PREVIEW_SIZE, panel_y - 10)
+        self.draw_text("KÖVETKEZŐ", FONT_MEDIUM, WHITE, panel_x + 80, panel_y)  # Középre igazítva
         
         # Következő elem rajzolása továbbfejlesztett 3D hatással
         shape = next_piece.get_shape()
+        # Központosítás számítása
+        shape_width = len(shape[0]) * (BLOCK_SIZE // 1.5)
+        shape_height = len(shape) * (BLOCK_SIZE // 1.5)
+        start_x = panel_x + (120 - shape_width) // 2  # Középre igazítás
+        start_y = panel_y + (120 - shape_height) // 2  # Középre igazítás
+        
         for i, row in enumerate(shape):
             for j, cell in enumerate(row):
                 if cell == '0':
-                    x = panel_x + j * (BLOCK_SIZE // 1.5)
-                    y = panel_y + 20 + i * (BLOCK_SIZE // 1.5)
+                    x = start_x + j * (BLOCK_SIZE // 1.5)
+                    y = start_y + i * (BLOCK_SIZE // 1.5)
                     block_size = BLOCK_SIZE // 1.5
                     
                     # Blokk rajzolása 3D hatással
