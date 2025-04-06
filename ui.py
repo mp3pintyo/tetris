@@ -256,7 +256,7 @@ class UI:
                       
     def draw_next_piece(self, next_piece):
         """
-        A következő elem előnézetének rajzolása.
+        A következő elem előnézetének rajzolása
         
         Args:
             next_piece: A következő Piece objektum
