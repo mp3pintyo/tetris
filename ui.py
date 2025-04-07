@@ -141,22 +141,15 @@ class UI:
         self.screen.blit(grid_overlay, (0, 0))
         
     def draw_title(self):
-        """Animált cím rajzolása."""
-        title_y = 20  # 40-ről 120-ra növelve, hogy ne lógjon rá a játéktérre
-        self.animation_time = time.time()
-        glow_size = abs(math.sin(self.animation_time)) * 10 + 5
-        
-        # Ragyogás rajzolása
-        for i in range(3):
-            size = int(glow_size * (3-i)/3)
-            alpha = 100 - i * 30
-            glow_text = pygame.font.Font(None, 60 + size).render("MODERN TETRIS", True, (255, 255, 255, alpha))
-            self.screen.blit(glow_text, 
-                           (SCREEN_WIDTH // 2 - glow_text.get_width() // 2, 
-                            title_y - glow_text.get_height() // 2))
-        
-        # Tényleges címszöveg rajzolása
-        self.draw_text("MODERN TETRIS", FONT_LARGE, WHITE, SCREEN_WIDTH // 2, title_y)
+        """3D-s hatású cím rajzolása."""
+        title_y = 20
+        text = "MODERN TETRIS"
+        # Árnyék
+        self.draw_text(text, FONT_LARGE, (0, 0, 0), SCREEN_WIDTH // 2 + 3, title_y + 3)
+        # Világos highlight
+        self.draw_text(text, FONT_LARGE, (255, 255, 255), SCREEN_WIDTH // 2 - 2, title_y - 2)
+        # Fő szöveg
+        self.draw_text(text, FONT_LARGE, MODERN_YELLOW, SCREEN_WIDTH // 2, title_y)
         
     def draw_grid_lines(self):
         """Játéktér rácsvonalainak rajzolása halvány effekttel."""
